@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersion>1</activeVersion>
+    <description>Prompt Builder Wrapper for Customer Service Managers (Case Context)</description>
+    <developerName>PromptBusinessPlayground</developerName>
+    <masterLabel>Prompt Business Playground</masterLabel>
+    <templateVersions>
+        <content>{!$Input:UserPrompt}
+
+This is the main Case and its Emails data in JSON:
+&lt;caseData&gt;
+{!$Apex:BusinessPlaygroundPromptAction.Prompt}
+&lt;/caseData&gt;
+
+</content>
+        <inputs>
+            <apiName>ContextCase</apiName>
+            <definition>SOBJECT://Case</definition>
+            <masterLabel>Context Case</masterLabel>
+            <referenceName>Input:ContextCase</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>UserPrompt</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>User Prompt</masterLabel>
+            <referenceName>Input:UserPrompt</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>ContextType</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Context Type</masterLabel>
+            <referenceName>Input:ContextType</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultGPT4Omni</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>apex://BusinessPlaygroundPromptAction</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>ContextType</parameterName>
+                <valueExpression>{!$Input:ContextType}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>UserPrompt</parameterName>
+                <valueExpression>{!$Input:UserPrompt}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Case</definition>
+                <isRequired>true</isRequired>
+                <parameterName>ContextCase</parameterName>
+                <valueExpression>{!$Input:ContextCase}</valueExpression>
+            </parameters>
+            <referenceName>Apex:BusinessPlaygroundPromptAction</referenceName>
+        </templateDataProviders>
+        <versionNumber>1</versionNumber>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

@@ -1,0 +1,37 @@
+<template>
+    <lightning-card title="Prompt Playground">
+
+        <lightning-input class="slds-p-around_small"
+                         type="text"
+                         label="Case Id"
+                         placeholder="Insert Case Id here..."
+                         value={caseId}
+                         pattern="^500[a-zA-Z0-9]{12,15}$"
+                         onchange={handleCaseIdChange}></lightning-input>
+
+        <lightning-textarea class="slds-p-around_small"
+                            label="Your Prompt"
+                            max-length="6000"
+                            value={userPrompt}
+                            placeholder="Insert your prompt here..."
+                            onchange={handleUserPromptChange}></lightning-textarea>
+
+        <lightning-combobox class="slds-p-around_small"
+                            name="context"
+                            label="Context"
+                            value={contextType}
+                            options={contextOptions}
+                            onchange={handleContextChange}></lightning-combobox>
+
+        <lightning-button class="slds-align_absolute-center" label="Get Response" onclick={getResponse} disabled={disableButton}></lightning-button>
+
+        <p class="slds-p-around_small"><lightning-formatted-text value={modelResponse}></lightning-formatted-text></p>
+
+        <lightning-spinner
+                if:true={showSpinner}
+                alternative-text="Loading..."
+                variant="brand"
+                size="small">
+        </lightning-spinner>
+    </lightning-card>
+</template>

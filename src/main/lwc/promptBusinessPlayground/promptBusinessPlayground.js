@@ -1,5 +1,4 @@
-import {api, LightningElement, track, wire} from 'lwc';
-import { getRecord } from "lightning/uiRecordApi";
+import { LightningElement, track } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 import getModelResponse from '@salesforce/apex/PromptBusinessPlaygroundController.getModelResponse';
